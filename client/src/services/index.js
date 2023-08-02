@@ -27,8 +27,20 @@ export const logoutUser = async (token) => {
     const response = await axios.get(`${API_URL}/logout`, {
       headers: { authorization: getAccessToken() },
     });
-    return response.data;
+    return response;
   } catch (error) {
     console.error("Error loggingOut:", error);
   }
 };
+//Create blog
+export const createPost = async (post) => {
+  try {
+    const response = await axios.post(`${API_URL}/create`, post, {
+      // headers: { authorization: getAccessToken() },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error creating post:", error);
+  }
+};
+//

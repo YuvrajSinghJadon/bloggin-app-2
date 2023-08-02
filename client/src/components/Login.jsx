@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   Container,
@@ -12,6 +12,7 @@ import {
 import { AccountCircle, Visibility, VisibilityOff } from "@mui/icons-material";
 import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
 import { createUser, loginUser } from "../services";
+import { DataContext } from "../context/DataProvider";
 
 const loginInitialValues = {
   username: "",
@@ -29,6 +30,7 @@ const LoginForm = ({ userAuth }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [error, showError] = useState("");
   const navigate = useNavigate();
+  const { setAccount } = useContext(DataContext);
   //toggle between login and signup
   const [account, toggleAccount] = useState("login");
   const toggleSignup = () => {
@@ -75,6 +77,10 @@ const LoginForm = ({ userAuth }) => {
         "refreshToken",
         `Bearer ${response.data.refreshToken}`
       );
+      setAccount({
+        name: response.data.name,
+        username: response.data.username,
+      });
       userAuth(true);
       navigate("/");
     } else {

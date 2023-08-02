@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Login from "./components/Login";
 import Home from "./components/Home";
+import CreatePost from "./components/Blog/CreateBlog";
 import {
   BrowserRouter,
   Routes,
@@ -8,6 +9,7 @@ import {
   Navigate,
   Outlet,
 } from "react-router-dom";
+import DataProvider from "./context/DataProvider";
 
 const PrivateRoute = ({ isAuth, ...props }) => {
   const token = sessionStorage.getItem("accessToken");
@@ -21,17 +23,20 @@ const PrivateRoute = ({ isAuth, ...props }) => {
 };
 
 function App() {
-  const [isAuth, userAuth] = useState(true);
+  const [isAuth, userAuth] = useState(false);
 
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/login" element={<Login userAuth={userAuth} />} />
-        <Route path="/" element={<PrivateRoute isAuth={isAuth} />}>
-          <Route path="/" element={<Home />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <DataProvider>
+      <BrowserRouter>
+        <Routes>
+          {/* <Route path="/" element={<CreatePost />} /> */}
+          <Route path="/login" element={<Login userAuth={userAuth} />} />
+          <Route path="/" element={<PrivateRoute isAuth={isAuth} />}>
+            <Route path="/" element={<CreatePost />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </DataProvider>
   );
 }
 
