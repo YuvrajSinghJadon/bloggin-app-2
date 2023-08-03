@@ -2,6 +2,7 @@ import { useState } from "react";
 import Login from "./components/Login";
 import Home from "./components/Home";
 import CreatePost from "./components/Blog/CreateBlog";
+import ReadPost from "./components/Blog/ReadBlog";
 import {
   BrowserRouter,
   Routes,
@@ -32,7 +33,13 @@ function App() {
           {/* <Route path="/" element={<CreatePost />} /> */}
           <Route path="/login" element={<Login userAuth={userAuth} />} />
           <Route path="/" element={<PrivateRoute isAuth={isAuth} />}>
-            <Route path="/" element={<CreatePost />} />
+            <Route path="/" element={<Home />} />
+          </Route>
+          <Route path="/post" element={<PrivateRoute isAuth={isAuth} />}>
+            <Route path="/post" element={<CreatePost />} />
+          </Route>
+          <Route path="/read/:_id" element={<PrivateRoute isAuth={isAuth} />}>
+            <Route path="/read/:_id" element={<ReadPost />} />
           </Route>
         </Routes>
       </BrowserRouter>

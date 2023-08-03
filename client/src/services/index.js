@@ -32,7 +32,7 @@ export const logoutUser = async (token) => {
     console.error("Error loggingOut:", error);
   }
 };
-//Create blog
+//Create post
 export const createPost = async (post) => {
   try {
     const response = await axios.post(`${API_URL}/create`, post, {
@@ -43,4 +43,35 @@ export const createPost = async (post) => {
     console.error("Error creating post:", error);
   }
 };
-//
+//get post
+export const getPostByid = async (id) => {
+  try {
+    const response = await axios.get(`${API_URL}/read/${id}`, {
+      // headers: { authorization: getAccessToken() },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error getting post:", error);
+  }
+};
+//delete post
+export const deletePost = async (id) => {
+  try {
+    const response = await axios.delete(`${API_URL}/delete/${id}`, {
+      // headers: { authorization: getAccessToken() },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error deleting post:", error);
+  }
+};
+//getAllPosts
+export const getAllPosts = async (category) => {
+  try {
+    const response = await axios.get(`${API_URL}/posts`);
+    console.log(response);
+    return response.data;
+  } catch (error) {
+    console.error("Error getting all posts:", error);
+  }
+};

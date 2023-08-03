@@ -21,9 +21,9 @@ router.get("/logout", logoutUser);
 
 //blog routes
 router.post("/create", createPost);
-router.get("/read:_id", getPost);
+router.get("/read/:id", getPost);
 router.get("/posts", getAllPosts);
-router.put("/update:_id", updatePost);
-router.delete("/delete:_id", deletePost);
+router.put("/update:id", updatePost);
+router.delete("/delete:id", deletePost);
 
 export default router;
