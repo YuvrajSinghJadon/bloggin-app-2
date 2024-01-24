@@ -1,36 +1,35 @@
-import React from "react";
-import {
-  Card,
-  CardContent,
-  Typography,
-  Avatar,
-  IconButton,
-} from "@mui/material";
+import { useState, useContext } from "react";
+import { DataContext } from "../context/DataProvider";
+import { Card, CardContent, Typography, IconButton } from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { deleteComment } from "../services";
+const CommentCard = ({ comment, setToggle }) => {
+  const { account } = useContext(DataContext);
+  const removeComment = async () => {
+    await deleteComment(comment._id);
+    setToggle((prev) => !prev);
+  };
 
-const CommentCard = ({ username, date, commentText }) => {
-  const isUserComment = true;
   return (
     <Card sx={{ width: "100%", marginBottom: 2 }}>
       <CardContent sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-        <Avatar sx={{ width: 40, height: 40 }}>
-          <AccountCircleIcon />
-        </Avatar>
+        <AccountCircleIcon color="primary" fontSize="large" />
+
         <div>
-          <Typography variant="subtitle2">username</Typography>
+          <Typography variant="subtitle2">{comment.name}</Typography>
           <Typography variant="body2" color="textSecondary">
-            date
+            {comment.date}
           </Typography>
         </div>
-        {isUserComment && (
+        {comment.name === account.username && (
           <IconButton sx={{ marginLeft: "auto" }} color="error" size="large">
-            <DeleteIcon />
+            <DeleteIcon onClick={() => removeComment()} />
           </IconButton>
         )}
       </CardContent>
       <CardContent>
-        <Typography variant="body1">commentText</Typography>
+        <Typography variant="body1">{comment.comments}</Typography>
       </CardContent>
     </Card>
   );

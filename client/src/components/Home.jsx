@@ -27,7 +27,6 @@ const Home = () => {
 
   const [searchParams] = useSearchParams();
   const category = searchParams.get("category");
-  console.log("category", category);
   useEffect(() => {
     const fetchData = async () => {
       let response = await getAllPosts();
@@ -61,7 +60,7 @@ const Home = () => {
           <Grid item xs={12} sm={9}>
             <Grid container spacing={2}>
               {posts.map((card) => (
-                <Grid key={card.id} item xs={12} sm={6} md={4}>
+                <Grid key={card._id} item xs={12} sm={6} md={4}>
                   <BlogCard
                     _id={card._id}
                     imageSrc={card.imageSrc}

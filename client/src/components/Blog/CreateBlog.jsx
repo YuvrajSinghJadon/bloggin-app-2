@@ -16,10 +16,7 @@ import {
 import { createPost } from "../../services/";
 import Carousel from "react-material-ui-carousel";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
-import CommentCard from "../commentCard";
-import BlogCard from "../blogCard";
-import { ClassNames } from "@emotion/react";
-import { set } from "mongoose";
+
 import { DataContext } from "../../context/DataProvider";
 
 const initialPost = {
@@ -39,58 +36,6 @@ const CreateBlog = () => {
   const [error, showError] = useState("");
   const navigate = useNavigate();
   post.username = account.username;
-  const Comments = [
-    {
-      username: "JohnDoe",
-      date: "2023-08-02",
-      text: "Great article! I really enjoyed reading it.",
-    },
-    {
-      username: "JaneSmith",
-      date: "2023-08-03",
-      text: "This is very helpful information. Thanks for sharing!",
-    },
-    {
-      username: "Mike123",
-      date: "2023-08-04",
-      text: "I completely agree with your points. Well said!",
-    },
-    {
-      username: "Emily25",
-      date: "2023-08-05",
-      text: "I have been looking for this information everywhere. Thanks a lot!",
-    },
-    {
-      username: "Alex87",
-      date: "2023-08-06",
-      text: "Amazing post! I'll definitely be sharing this with my friends.",
-    },
-    {
-      username: "Sara12",
-      date: "2023-08-07",
-      text: "Your writing style is so engaging. I couldn't stop reading!",
-    },
-    {
-      username: "Mark34",
-      date: "2023-08-08",
-      text: "I learned a lot from this article. Looking forward to more.",
-    },
-    {
-      username: "Linda89",
-      date: "2023-08-09",
-      text: "You have a unique perspective on this topic. Keep it up!",
-    },
-    {
-      username: "Sam567",
-      date: "2023-08-10",
-      text: "I had never thought about this before. Thanks for opening my eyes.",
-    },
-    {
-      username: "Chris22",
-      date: "2023-08-11",
-      text: "Your content is always top-notch. Keep up the great work!",
-    },
-  ];
 
   const cardList = [
     {
@@ -267,15 +212,6 @@ const CreateBlog = () => {
             </Carousel>
           </Grid>
         </Grid>
-        {Comments.map((comment, index) => (
-          <CommentCard
-            key={index}
-            username={comment.username}
-            date={comment.date}
-            commentText={comment.text}
-            accountUsername="your-account-username" // Replace with the account username
-          />
-        ))}
       </Container>
     </div>
   );

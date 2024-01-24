@@ -14,6 +14,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import CommentCard from "../commentCard";
 import { DataContext } from "../../context/DataProvider";
 import { getPostByid, deletePost } from "../../services/";
+import Comments from "../comments";
 const ReadBlog = () => {
   // Sample list of small cards (you can replace this with your data)
 
@@ -26,7 +27,6 @@ const ReadBlog = () => {
   useEffect(() => {
     const fetchData = async () => {
       let response = await getPostByid(_id);
-      console.log(response);
       if (response) {
         setPost(response);
       }
@@ -34,47 +34,10 @@ const ReadBlog = () => {
     fetchData();
   }, []);
 
-  const deleteBlog = async () => {
-    await API.deletePost(post._id);
-    navigate("/");
-  };
-  const Comments = [
-    {
-      username: "JohnDoe",
-      date: "2023-08-02",
-      text: "Great article! I really enjoyed reading it.",
-    },
-    {
-      username: "JaneSmith",
-      date: "2023-08-03",
-      text: "This is very helpful information. Thanks for sharing!",
-    },
-    {
-      username: "Mike123",
-      date: "2023-08-04",
-      text: "I completely agree with your points. Well said!",
-    },
-    {
-      username: "Emily25",
-      date: "2023-08-05",
-      text: "I have been looking for this information everywhere. Thanks a lot!",
-    },
-    {
-      username: "Alex87",
-      date: "2023-08-06",
-      text: "Amazing post! I'll definitely be sharing this with my friends.",
-    },
-    {
-      username: "Sara12",
-      date: "2023-08-07",
-      text: "Your writing style is so engaging. I couldn't stop reading!",
-    },
-    {
-      username: "Mark34",
-      date: "2023-08-08",
-      text: "I learned a lot from this article. Looking forward to more.",
-    },
-  ];
+  // const deleteBlog = async () => {
+  //   await deletePost(post._id);
+  //   navigate("/");
+  // };
 
   const cardList = [
     {
@@ -214,15 +177,7 @@ const ReadBlog = () => {
             </Carousel>
           </Grid>
         </Grid>
-        {Comments.map((comment, index) => (
-          <CommentCard
-            key={index}
-            username={comment.username}
-            date={comment.date}
-            commentText={comment.text}
-            accountUsername="your-account-username" // Replace with the account username
-          />
-        ))}
+        <Comments post={post} />
       </Container>
     </div>
   );

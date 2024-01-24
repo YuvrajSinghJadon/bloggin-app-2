@@ -75,3 +75,29 @@ export const getAllPosts = async (category) => {
     console.error("Error getting all posts:", error);
   }
 };
+//comments
+export const newComment = async (comment) => {
+  try {
+    const response = await axios.post(`${API_URL}/createComment`, comment);
+    return response.data;
+  } catch (error) {
+    console.error("Error creating comment:", error);
+  }
+};
+export const getAllComments = async (id) => {
+  try {
+    const response = await axios.get(`${API_URL}/comments/${id}`);
+    console.log("comments form index.js", response);
+    return response.data;
+  } catch (error) {
+    console.error("Error getting comments:", error);
+  }
+};
+export const deleteComment = async (id) => {
+  try {
+    const response = await axios.delete(`${API_URL}/deleteComment/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error deleting comment:", error);
+  }
+};
